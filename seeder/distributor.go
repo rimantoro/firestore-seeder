@@ -248,7 +248,7 @@ func SeedDistributorUser(client *firestore.Client, ctx context.Context) (err err
 
 	rows := []map[string]interface{}{
 		{
-			"username":    "useradmin",
+			"username":    "admin@company.xyz",
 			"email":       "admin@company.xyz",
 			"phonenumber": "+628001110001",
 			"distributor": map[string]interface{}{
@@ -264,7 +264,7 @@ func SeedDistributorUser(client *firestore.Client, ctx context.Context) (err err
 			},
 		},
 		{
-			"username":    "userops",
+			"username":    "ops@company.xyz",
 			"email":       "ops@company.xyz",
 			"phonenumber": "+628001110002",
 			"distributor": map[string]interface{}{
@@ -280,7 +280,7 @@ func SeedDistributorUser(client *firestore.Client, ctx context.Context) (err err
 			},
 		},
 		{
-			"username":    "userview",
+			"username":    "view@company.xyz",
 			"email":       "view@company.xyz",
 			"phonenumber": "+628001110003",
 			"distributor": map[string]interface{}{
@@ -296,7 +296,7 @@ func SeedDistributorUser(client *firestore.Client, ctx context.Context) (err err
 			},
 		},
 		{
-			"username":    "userinactive",
+			"username":    "inactive@company.xyz",
 			"email":       "inactive@company.xyz",
 			"phonenumber": "+628001110004",
 			"distributor": map[string]interface{}{
