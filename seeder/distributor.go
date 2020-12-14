@@ -96,14 +96,14 @@ func SeedDistributorPermissions(client *firestore.Client, ctx context.Context) (
 func SeedDistributorRoles(client *firestore.Client, ctx context.Context) (err error) {
 	rows := []map[string]interface{}{
 		{
-			"label":       "Administrator",
+			"label":       "Pengurus",
 			"description": "Superuser role",
 			"status":      1,
 			"permissions": []string{"*|*"},
 		},
 		{
-			"label":       "Ops",
-			"description": "Operational role",
+			"label":       "Administratif",
+			"description": "Operational or administrative role",
 			"status":      1,
 			"permissions": []string{"alokasi|view", "alokasi|write", "alokasi|export", "vaksin|view", "vaksin|write", "vaksin|export"},
 		},
@@ -240,9 +240,9 @@ func SeedDistributorDistributors(client *firestore.Client, ctx context.Context) 
 func SeedDistributorUser(client *firestore.Client, ctx context.Context) (err error) {
 
 	// get specified role (by implicit ID) query (collection_name/{id})
-	docRoleAdmin := client.Doc("distributor_roles/administrator")
-	docRoleOPS := client.Doc("distributor_roles/ops")
-	docRoleViewer := client.Doc("distributor_roles/view_only")
+	docRoleAdmin := client.Doc("distributor_roles/pengurus")
+	docRoleOPS := client.Doc("distributor_roles/administrasi")
+	docRoleViewer := client.Doc("distributor_roles/view-only")
 
 	rows := []map[string]interface{}{
 		{
