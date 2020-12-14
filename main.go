@@ -24,6 +24,7 @@ func main() {
 
 	seeder.SeedDistributorPermissions(client, ctx)
 	seeder.SeedDistributorRoles(client, ctx)
+	seeder.SeedDistributorDistributors(client, ctx)
 	seeder.SeedDistributorUser(client, ctx)
 
 }

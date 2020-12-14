@@ -156,6 +156,89 @@ func SeedDistributorRoles(client *firestore.Client, ctx context.Context) (err er
 	return
 }
 
+func SeedDistributorDistributors(client *firestore.Client, ctx context.Context) (err error) {
+	rows := []map[string]interface{}{
+		{
+			"company_name":  "Distributor A",
+			"address":       "Jl Otto Iskandardinata Psr Baru Bl D Lt D-2/5,Kebon Jeruk",
+			"kelurahan":     "Kebon Jeruk",
+			"kecamatan":     "Andir",
+			"city":          "Bandung",
+			"country":       "Indonesia",
+			"postalcode":    "",
+			"location":      []float32{-7.025253, 107.519760},
+			"status":        1,
+			"website":       "http://alterra.id",
+			"contact_email": []string{"div1@email.xyz", "div2@email.xyz"},
+			"phonenumber":   []string{"+62211230001", "+6281100001"},
+			"fax_no":        []string{"+62211230002", "+62211230003"},
+			"whatsapp_no":   []string{"+6281100002", "+6281100002"},
+		},
+		{
+			"company_name":  "Distributor B",
+			"address":       "Jl Perjuangan Bl DH/88",
+			"kelurahan":     "",
+			"kecamatan":     "",
+			"city":          "Jakarta",
+			"country":       "Indonesia",
+			"postalcode":    "",
+			"location":      []float32{-7.025253, 107.519760},
+			"status":        1,
+			"website":       "http://alterra.id",
+			"contact_email": []string{"div1@email.xyz", "div2@email.xyz"},
+			"phonenumber":   []string{"+62211230001", "+6281100001"},
+			"fax_no":        []string{"+62211230002", "+62211230003"},
+			"whatsapp_no":   []string{"+6281100002", "+6281100002"},
+		},
+	}
+
+	for _, v := range rows {
+		doc := client.Doc("distributors/" + v["company_name"].(string))
+		_, err = doc.Create(ctx, map[string]interface{}{
+			"company_name":  v["company_name"],
+			"address":       v["address"],
+			"kelurahan":     v["kelurahan"],
+			"kecamatan":     v["kecamatan"],
+			"city":          v["city"],
+			"country":       v["country"],
+			"postalcode":    v["postalcode"],
+			"location":      v["location"],
+			"status":        v["status"],
+			"website":       v["website"],
+			"contact_email": v["contact_email"],
+			"phonenumber":   v["phonenumber"],
+			"fax_no":        v["fax_no"],
+			"whatsapp_no":   v["whatsapp_no"],
+			// default
+			"created_at": time.Now(),
+			"created_by": map[string]interface{}{
+				"id":      "system",
+				"name":    "system",
+				"colname": "distributor_users",
+			},
+			"updated_at": nil,
+			"updated_by": map[string]interface{}{
+				"id":      nil,
+				"name":    nil,
+				"colname": "distributor_users",
+			},
+			"deleted_at": nil,
+			"deleted_by": map[string]interface{}{
+				"id":      nil,
+				"name":    nil,
+				"colname": "distributor_users",
+			},
+		})
+
+		if err != nil {
+			log.Fatalf("Failed adding: %v", err)
+			return
+		}
+	}
+
+	return
+}
+
 func SeedDistributorUser(client *firestore.Client, ctx context.Context) (err error) {
 
 	// get specified role (by implicit ID) query (collection_name/{id})
@@ -169,13 +252,13 @@ func SeedDistributorUser(client *firestore.Client, ctx context.Context) (err err
 			"email":       "admin@company.xyz",
 			"phonenumber": "+628001110001",
 			"distributor": map[string]interface{}{
-				"id":           "xxxxxx",
-				"company_name": "xxxxxxxxxx",
+				"id":           "Distributor A",
+				"company_name": "Distributor A",
 			},
-			"password":      util.GenHashedPass("password"),
-			"password_salt": "xxxxxxxxxxxx",
-			"fullname":      "User Dummy Administrator",
-			"status":        1,
+			"password": util.GenHashedPass("password"),
+			// "password_salt": "xxxxxxxxxxxx",
+			"fullname": "User Dummy Administrator",
+			"status":   1,
 			"roles": []string{
 				docRoleAdmin.ID,
 			},
@@ -185,13 +268,13 @@ func SeedDistributorUser(client *firestore.Client, ctx context.Context) (err err
 			"email":       "ops@company.xyz",
 			"phonenumber": "+628001110002",
 			"distributor": map[string]interface{}{
-				"id":           "xxxxxx",
-				"company_name": "xxxxxxxxxx",
+				"id":           "Distributor A",
+				"company_name": "Distributor A",
 			},
-			"password":      util.GenHashedPass("password"),
-			"password_salt": "xxxxxxxxxxxx",
-			"fullname":      "User Dummy for Distributor Ops",
-			"status":        1,
+			"password": util.GenHashedPass("password"),
+			// "password_salt": "xxxxxxxxxxxx",
+			"fullname": "User Dummy for Distributor Ops",
+			"status":   1,
 			"roles": []string{
 				docRoleOPS.ID,
 			},
@@ -201,13 +284,13 @@ func SeedDistributorUser(client *firestore.Client, ctx context.Context) (err err
 			"email":       "view@company.xyz",
 			"phonenumber": "+628001110003",
 			"distributor": map[string]interface{}{
-				"id":           "xxxxxx",
-				"company_name": "xxxxxxxxxx",
+				"id":           "Distributor A",
+				"company_name": "Distributor A",
 			},
-			"password":      util.GenHashedPass("password"),
-			"password_salt": "xxxxxxxxxxxx",
-			"fullname":      "Dummy for view only user",
-			"status":        1,
+			"password": util.GenHashedPass("password"),
+			// "password_salt": "xxxxxxxxxxxx",
+			"fullname": "Dummy for view only user",
+			"status":   1,
 			"roles": []string{
 				docRoleViewer.ID,
 			},
@@ -217,13 +300,13 @@ func SeedDistributorUser(client *firestore.Client, ctx context.Context) (err err
 			"email":       "inactive@company.xyz",
 			"phonenumber": "+628001110004",
 			"distributor": map[string]interface{}{
-				"id":           "xxxxxx",
-				"company_name": "xxxxxxxxxx",
+				"id":           "Distributor A",
+				"company_name": "Distributor A",
 			},
-			"password":      util.GenHashedPass("password"),
-			"password_salt": "xxxxxxxxxxxx",
-			"fullname":      "Dummy for inactive user",
-			"status":        0,
+			"password": util.GenHashedPass("password"),
+			// "password_salt": "xxxxxxxxxxxx",
+			"fullname": "Dummy for inactive user",
+			"status":   0,
 			"roles": []string{
 				docRoleAdmin.ID,
 			},
