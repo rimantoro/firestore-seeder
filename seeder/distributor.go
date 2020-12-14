@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"cloud.google.com/go/firestore"
+	"github.com/gosimple/slug"
 )
 
 var (
@@ -193,7 +194,7 @@ func SeedDistributorDistributors(client *firestore.Client, ctx context.Context) 
 	}
 
 	for _, v := range rows {
-		doc := client.Doc("distributors/" + v["company_name"].(string))
+		doc := client.Doc("distributors/" + slug.Make(v["company_name"].(string)))
 		_, err = doc.Create(ctx, map[string]interface{}{
 			"company_name":  v["company_name"],
 			"address":       v["address"],
