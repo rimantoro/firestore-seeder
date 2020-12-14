@@ -96,21 +96,18 @@ func SeedDistributorPermissions(client *firestore.Client, ctx context.Context) (
 func SeedDistributorRoles(client *firestore.Client, ctx context.Context) (err error) {
 	rows := []map[string]interface{}{
 		{
-			"id":          "administrator",
 			"label":       "Administrator",
 			"description": "Superuser role",
 			"status":      1,
 			"permissions": []string{"*|*"},
 		},
 		{
-			"id":          "ops",
 			"label":       "Ops",
 			"description": "Operational role",
 			"status":      1,
 			"permissions": []string{"alokasi|view", "alokasi|write", "alokasi|export", "vaksin|view", "vaksin|write", "vaksin|export"},
 		},
 		{
-			"id":          "view_only",
 			"label":       "View Only",
 			"description": "Viewer only role",
 			"status":      1,
@@ -119,7 +116,7 @@ func SeedDistributorRoles(client *firestore.Client, ctx context.Context) (err er
 	}
 
 	for _, v := range rows {
-		doc := client.Doc("distributor_roles/" + v["id"].(string))
+		doc := client.Doc("distributor_roles/" + slug.Make(v["label"].(string)))
 		_, err = doc.Create(ctx, map[string]interface{}{
 			"label":       rows[0]["label"],
 			"description": rows[0]["description"],
@@ -253,7 +250,7 @@ func SeedDistributorUser(client *firestore.Client, ctx context.Context) (err err
 			"email":       "admin@company.xyz",
 			"phonenumber": "+628001110001",
 			"distributor": map[string]interface{}{
-				"id":           "Distributor A",
+				"id":           "distributor-a",
 				"company_name": "Distributor A",
 			},
 			"password": util.GenHashedPass("password"),
@@ -269,7 +266,7 @@ func SeedDistributorUser(client *firestore.Client, ctx context.Context) (err err
 			"email":       "ops@company.xyz",
 			"phonenumber": "+628001110002",
 			"distributor": map[string]interface{}{
-				"id":           "Distributor A",
+				"id":           "distributor-a",
 				"company_name": "Distributor A",
 			},
 			"password": util.GenHashedPass("password"),
@@ -285,7 +282,7 @@ func SeedDistributorUser(client *firestore.Client, ctx context.Context) (err err
 			"email":       "view@company.xyz",
 			"phonenumber": "+628001110003",
 			"distributor": map[string]interface{}{
-				"id":           "Distributor A",
+				"id":           "distributor-a",
 				"company_name": "Distributor A",
 			},
 			"password": util.GenHashedPass("password"),
@@ -301,7 +298,7 @@ func SeedDistributorUser(client *firestore.Client, ctx context.Context) (err err
 			"email":       "inactive@company.xyz",
 			"phonenumber": "+628001110004",
 			"distributor": map[string]interface{}{
-				"id":           "Distributor A",
+				"id":           "distributor-a",
 				"company_name": "Distributor A",
 			},
 			"password": util.GenHashedPass("password"),
