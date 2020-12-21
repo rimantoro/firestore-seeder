@@ -11,13 +11,13 @@ import (
 func main() {
 	ctx := context.Background()
 
-	// // for local
-	// db := "spartech-infa-vaccine"
-	// os.Setenv("FIRESTORE_EMULATOR_HOST", "0.0.0.0:8080")
+	// for local
+	db := "spartech-infa-vaccine"
+	os.Setenv("FIRESTORE_EMULATOR_HOST", "0.0.0.0:8080")
 
-	// for cloud
-	db := "spartech-282005"
-	os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", "./dev-auth.json")
+	// // for cloud
+	// db := "spartech-282005"
+	// os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", "./dev-auth.json")
 
 	client, err := firestore.NewClient(ctx, db)
 	if err != nil {
@@ -32,5 +32,6 @@ func main() {
 	seeder.SeedDistributorVaccines(client, ctx)
 
 	seeder.SeedFaskesData(client, ctx)
+	seeder.SeedOperatorData(client, ctx)
 
 }
