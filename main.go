@@ -11,10 +11,13 @@ import (
 func main() {
 	ctx := context.Background()
 
-	host := "0.0.0.0:8080"
-	db := "spartech-infa-vaccine"
+	// // for local
+	// db := "spartech-infa-vaccine"
+	// os.Setenv("FIRESTORE_EMULATOR_HOST", "0.0.0.0:8080")
 
-	os.Setenv("FIRESTORE_EMULATOR_HOST", host)
+	// for cloud
+	db := "spartech-282005"
+	os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", "./dev-auth.json")
 
 	client, err := firestore.NewClient(ctx, db)
 	if err != nil {
@@ -26,5 +29,6 @@ func main() {
 	seeder.SeedDistributorRoles(client, ctx)
 	seeder.SeedDistributorDistributors(client, ctx)
 	seeder.SeedDistributorUser(client, ctx)
+	seeder.SeedDistributorVaccines(client, ctx)
 
 }
