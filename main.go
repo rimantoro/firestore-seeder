@@ -31,4 +31,6 @@ func main() {
 	seeder.SeedDistributorUser(client, ctx)
 	seeder.SeedDistributorVaccines(client, ctx)
 
+	seeder.SeedFaskesData(client, ctx)
+
 }
