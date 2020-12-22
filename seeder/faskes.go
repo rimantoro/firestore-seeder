@@ -402,6 +402,18 @@ var (
 
 func SeedFaskesData(client *firestore.Client, ctx context.Context) (err error) {
 
+	for _, v := range DataFaskesType {
+		doc := client.Doc("medfac_types/" + slug.Make(v["label"].(string)))
+		_, err = doc.Create(ctx, map[string]interface{}{
+			"label": v["label"],
+		})
+
+		if err != nil {
+			log.Fatalf("Failed adding: %v", err)
+			return
+		}
+	}
+
 	for _, v := range DataFaskes {
 		doc := client.Doc("medfacs/" + fmt.Sprintf("%s", v["id"]))
 		_, err = doc.Create(ctx, map[string]interface{}{
