@@ -155,6 +155,7 @@ var (
 
 	DataDistributors = []map[string]interface{}{
 		{
+			"id":            slug.Make("Distributor A"),
 			"company_name":  "Distributor A",
 			"address":       "Jl Otto Iskandardinata Psr Baru Bl D Lt D-2/5,Kebon Jeruk",
 			"kelurahan":     "Kebon Jeruk",
@@ -171,6 +172,7 @@ var (
 			"whatsapp_no":   []string{"+6281100002", "+6281100002"},
 		},
 		{
+			"id":            slug.Make("Distributor B"),
 			"company_name":  "Distributor B",
 			"address":       "Jl Perjuangan Bl DH/88",
 			"kelurahan":     "",
@@ -327,7 +329,7 @@ func SeedDistributorRoles(client *firestore.Client, ctx context.Context) (err er
 
 func SeedDistributorDistributors(client *firestore.Client, ctx context.Context) (err error) {
 	for _, v := range DataDistributors {
-		doc := client.Doc("distributors/" + slug.Make(v["company_name"].(string)))
+		doc := client.Doc("distributors/" + v["id"].(string))
 		_, err = doc.Create(ctx, map[string]interface{}{
 			"company_name":  v["company_name"],
 			"address":       v["address"],
