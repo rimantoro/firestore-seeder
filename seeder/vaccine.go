@@ -22,9 +22,12 @@ var (
 				"company_name": DataDistributors[0]["company_name"],
 			},
 			"stock": map[string]interface{}{
-				"available": 100000,
-				"hold":      0,
+				"available":     100000,
+				"hold":          0,
+				"allocated":     0,
+				"on_allocation": 0,
 			},
+			"price": 85000,
 		},
 		{
 			"id":          "X58fGNcATk0h",
@@ -37,9 +40,12 @@ var (
 				"company_name": DataDistributors[0]["company_name"],
 			},
 			"stock": map[string]interface{}{
-				"available": 1500000,
-				"hold":      0,
+				"available":     1500000,
+				"hold":          0,
+				"allocated":     0,
+				"on_allocation": 0,
 			},
+			"price": 50000,
 		},
 		{
 			"id":          "qm1tCv20G9QI",
@@ -52,9 +58,12 @@ var (
 				"company_name": DataDistributors[0]["company_name"],
 			},
 			"stock": map[string]interface{}{
-				"available": 100000,
-				"hold":      0,
+				"available":     100000,
+				"hold":          0,
+				"allocated":     0,
+				"on_allocation": 0,
 			},
+			"price": 90000,
 		},
 
 		// vaksin dari distributor B
@@ -69,9 +78,12 @@ var (
 				"company_name": DataDistributors[1]["company_name"],
 			},
 			"stock": map[string]interface{}{
-				"available": 100000,
-				"hold":      0,
+				"available":     100000,
+				"hold":          0,
+				"allocated":     0,
+				"on_allocation": 0,
 			},
+			"price": 83000,
 		},
 		{
 			"id":          "j6bT5DQ2At8w",
@@ -84,9 +96,12 @@ var (
 				"company_name": DataDistributors[1]["company_name"],
 			},
 			"stock": map[string]interface{}{
-				"available": 1500000,
-				"hold":      0,
+				"available":     1500000,
+				"hold":          0,
+				"allocated":     0,
+				"on_allocation": 0,
 			},
+			"price": 48000,
 		},
 		{
 			"id":          "3jXgVo3Rgw88",
@@ -99,9 +114,12 @@ var (
 				"company_name": DataDistributors[1]["company_name"],
 			},
 			"stock": map[string]interface{}{
-				"available": 100000,
-				"hold":      0,
+				"available":     100000,
+				"hold":          0,
+				"allocated":     0,
+				"on_allocation": 0,
 			},
+			"price": 91000,
 		},
 	}
 
@@ -220,6 +238,7 @@ func SeedDistributorVaccines(client *firestore.Client, ctx context.Context) (err
 			"status":      v["status"],
 			"distributor": v["distributor"],
 			"stock":       v["stock"],
+			"price":       v["price"],
 			// default
 			"created_at": time.Now(),
 			"created_by": map[string]interface{}{

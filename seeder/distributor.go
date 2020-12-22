@@ -244,6 +244,111 @@ var (
 		},
 	}
 
+	dummyOrderDate1, _ = time.Parse(time.RFC3339, "2020-12-10T19:00:00+07:00")
+	dummyOrderDate2, _ = time.Parse(time.RFC3339, "2020-12-12T10:00:00+07:00")
+	dummyOrderDate3, _ = time.Parse(time.RFC3339, "2020-12-15T10:00:00+07:00")
+
+	DataDistAlokasi = []map[string]interface{}{
+		{
+			"id":         "DL5z6u9Nz9Qg",
+			"order_no":   "2020-12-00001",
+			"order_date": dummyOrderDate1,
+			"note":       "dummy data",
+			"items": []map[string]interface{}{
+				{
+					"id":          DataDistVaksin[0]["id"],
+					"sku":         DataDistVaksin[0]["sku"],
+					"brand":       DataDistVaksin[0]["brand"],
+					"vaccinetype": DataDistVaksin[0]["vaccinetype"],
+					"qty":         1000,
+					"price":       DataDistVaksin[0]["price"],
+				},
+			},
+			"distributor": DataDistVaksin[0]["distributor"],
+			"medfac": map[string]interface{}{
+				"id":       DataFaskes[0]["id"],
+				"label":    DataFaskes[0]["label"],
+				"city":     DataFaskes[0]["city"],
+				"location": DataFaskes[0]["location"],
+			},
+			"amount": 1000 * DataDistVaksin[0]["price"].(int),
+			"shipping": map[string]interface{}{
+				"tracking_no":     "EV938507560CN",
+				"tracking_url":    "https://track24.net/service/wclop/tracking/EV938507560CN",
+				"expect_date":     dummyOrderDate3,
+				"date":            dummyOrderDate1,
+				"provider":        "",
+				"method":          "",
+				"status":          "received",
+				"dest_address":    "",
+				"dest_city":       "",
+				"dest_province":   "",
+				"dest_postalcode": "",
+				"note":            "",
+				"received_by":     "Bambang",
+				"received_date":   dummyOrderDate3,
+			},
+			// 0=menunggu pembayaran 1=terbayar 2=dalam pengiriman 3=pengiriman selesai
+			"status": 3,
+			"status_hist": []map[string]interface{}{
+				{
+					"order":  1,
+					"status": 0,
+					"date":   dummyOrderDate1,
+				},
+			},
+		},
+		{
+			"id":         "8pu1ZwOmL1Fg",
+			"order_no":   "2020-12-00002",
+			"order_date": dummyOrderDate2,
+			"note":       "dummy data",
+			"items": []map[string]interface{}{
+				{
+					"id":          DataDistVaksin[1]["id"],
+					"sku":         DataDistVaksin[1]["sku"],
+					"brand":       DataDistVaksin[1]["brand"],
+					"vaccinetype": DataDistVaksin[1]["vaccinetype"],
+					"qty":         1300,
+					"price":       DataDistVaksin[1]["price"],
+				},
+			},
+			"distributor": DataDistVaksin[1]["distributor"],
+			"medfac": map[string]interface{}{
+				"id":       DataFaskes[0]["id"],
+				"label":    DataFaskes[0]["label"],
+				"city":     DataFaskes[0]["city"],
+				"location": DataFaskes[0]["location"],
+			},
+			"amount": 1300 * DataDistVaksin[1]["price"].(int),
+			"shipping": map[string]interface{}{
+				"tracking_no":     "EV938507560CN",
+				"tracking_url":    "https://track24.net/service/wclop/tracking/EV938507560CN",
+				"expect_date":     dummyOrderDate3,
+				"date":            dummyOrderDate1,
+				"provider":        "",
+				"method":          "",
+				"status":          "on shipping",
+				"dest_address":    "",
+				"dest_city":       "",
+				"dest_province":   "",
+				"dest_postalcode": "",
+				"note":            "",
+				"received_by":     "Bambang",
+				"received_date":   nil,
+			},
+			// 0=menunggu pembayaran 1=terbayar 2=dalam pengiriman 3=pengiriman selesai
+			"status": 2,
+			"status_hist": []map[string]interface{}{
+				{
+					"order":  1,
+					"status": 0,
+					"date":   dummyOrderDate1,
+				},
+			},
+		},
+	}
+
 	DocDistRoles  []*firestore.DocumentRef
 	DocDistPermit []*firestore.DocumentRef
 )
@@ -390,6 +495,50 @@ func SeedDistributorUser(client *firestore.Client, ctx context.Context) (err err
 			"status":        v["status"],
 			"avatar":        v["avatar"],
 			"roles":         v["roles"],
+			// default
+			"created_at": time.Now(),
+			"created_by": map[string]interface{}{
+				"id":      "system",
+				"name":    "system",
+				"colname": "distributor_users",
+			},
+			"updated_at": nil,
+			"updated_by": map[string]interface{}{
+				"id":      nil,
+				"name":    nil,
+				"colname": "distributor_users",
+			},
+			"deleted_at": nil,
+			"deleted_by": map[string]interface{}{
+				"id":      nil,
+				"name":    nil,
+				"colname": "distributor_users",
+			},
+		})
+
+		if err != nil {
+			log.Fatalf("Failed adding: %v", err)
+			return
+		}
+	}
+
+	return
+}
+
+func SeedDistributorAlokasi(client *firestore.Client, ctx context.Context) (err error) {
+	for _, v := range DataDistAlokasi {
+		doc := client.Doc("distributor_orders/" + v["id"].(string))
+		_, err = doc.Create(ctx, map[string]interface{}{
+			"order_no":    v["order_no"],
+			"order_date":  v["order_date"],
+			"note":        v["note"],
+			"items":       v["items"],
+			"distributor": v["distributor"],
+			"amount":      v["amount"],
+			"shipping":    v["shipping"],
+			"status":      v["status"],
+			"status_hist": v["status_hist"],
+
 			// default
 			"created_at": time.Now(),
 			"created_by": map[string]interface{}{
