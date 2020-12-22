@@ -272,6 +272,7 @@ var (
 			// "password_salt": "xxxxxxxxxxxx",
 			"fullname": "Pengurus di RS A Bandung",
 			"status":   1,
+			"avatar":   "https://images.pexels.com/photos/36469/woman-person-flowers-wreaths.jpg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=100&w=100",
 			"roles": []string{
 				"pengurus",
 			},
@@ -288,6 +289,7 @@ var (
 			// "password_salt": "xxxxxxxxxxxx",
 			"fullname": "Suster/Administratif di RS A Bandung",
 			"status":   1,
+			"avatar":   "https://uifaces.co/our-content/donated/N8kxcjRw.jpg",
 			"roles": []string{
 				"administratif",
 			},
@@ -304,6 +306,7 @@ var (
 			// "password_salt": "xxxxxxxxxxxx",
 			"fullname": "Viewonly di RS A Bandung",
 			"status":   1,
+			"avatar":   "https://uifaces.co/our-content/donated/wteXSjwk.jpg",
 			"roles": []string{
 				"view-only",
 			},
@@ -320,6 +323,7 @@ var (
 			// "password_salt": "xxxxxxxxxxxx",
 			"fullname": "Tidak Aktif di RS A Bandung",
 			"status":   0,
+			"avatar":   "https://images.pexels.com/photos/412840/pexels-photo-412840.jpeg?crop=faces&fit=crop&h=200&w=200&auto=compress&cs=tinysrgb",
 			"roles": []string{
 				"pengurus",
 			},
@@ -337,6 +341,7 @@ var (
 			// "password_salt": "xxxxxxxxxxxx",
 			"fullname": "Pengurus di RS A Jakarta",
 			"status":   1,
+			"avatar":   "https://uifaces.co/our-content/donated/noplz47r59v1uxvyg8ku.png",
 			"roles": []string{
 				"pengurus",
 			},
@@ -353,6 +358,7 @@ var (
 			// "password_salt": "xxxxxxxxxxxx",
 			"fullname": "Suster/Administratif di RS A Jakarta",
 			"status":   1,
+			"avatar":   "https://images.pexels.com/photos/412840/pexels-photo-412840.jpeg?crop=faces&fit=crop&h=200&w=200&auto=compress&cs=tinysrgb",
 			"roles": []string{
 				"administratif",
 			},
@@ -369,6 +375,7 @@ var (
 			// "password_salt": "xxxxxxxxxxxx",
 			"fullname": "Viewonly di RS A Jakarta",
 			"status":   1,
+			"avatar":   "https://uifaces.co/our-content/donated/wteXSjwk.jpg",
 			"roles": []string{
 				"view-only",
 			},
@@ -385,6 +392,7 @@ var (
 			// "password_salt": "xxxxxxxxxxxx",
 			"fullname": "Tidak Aktif di RS A Jakarta",
 			"status":   0,
+			"avatar":   "https://images.pexels.com/photos/36469/woman-person-flowers-wreaths.jpg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=100&w=100",
 			"roles": []string{
 				"pengurus",
 			},
@@ -521,6 +529,7 @@ func SeedFaskesData(client *firestore.Client, ctx context.Context) (err error) {
 			"password_salt": v["password_salt"],
 			"fullname":      v["fullname"],
 			"status":        v["status"],
+			"avatar":        v["avatar"],
 			"roles":         v["roles"],
 
 			// default

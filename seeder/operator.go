@@ -140,6 +140,7 @@ var (
 			// "password_salt": "xxxxxxxxxxxx",
 			"fullname": "Operator Superuser",
 			"status":   1,
+			"avatar":   "https://randomuser.me/api/portraits/men/55.jpg",
 			"roles": []string{
 				"pengurus",
 			},
@@ -152,6 +153,7 @@ var (
 			// "password_salt": "xxxxxxxxxxxx",
 			"fullname": "Operator Viewer",
 			"status":   1,
+			"avatar":   "https://images.generated.photos/PgakVwN6rVSolTj8D0052vofGLCCzpZ8wSF_LLcU5f4/rs:fit:512:512/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zL3Yy/XzA1OTYyNjguanBn.jpg",
 			"roles": []string{
 				"view-only",
 			},
@@ -164,6 +166,7 @@ var (
 			// "password_salt": "xxxxxxxxxxxx",
 			"fullname": "Operator Inactive",
 			"status":   0,
+			"avatar":   "https://uifaces.co/our-content/donated/hvaUVob5.jpg",
 			"roles": []string{
 				"pengurus",
 			},
@@ -251,6 +254,7 @@ func SeedOperatorData(client *firestore.Client, ctx context.Context) (err error)
 			"password_salt": v["password_salt"],
 			"fullname":      v["fullname"],
 			"status":        v["status"],
+			"avatar":        v["avatar"],
 			"roles":         v["roles"],
 
 			// default

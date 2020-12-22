@@ -201,6 +201,7 @@ var (
 			// "password_salt": "xxxxxxxxxxxx",
 			"fullname": "User Dummy Administrator",
 			"status":   1,
+			"avatar":   "https://images.generated.photos/PgakVwN6rVSolTj8D0052vofGLCCzpZ8wSF_LLcU5f4/rs:fit:512:512/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zL3Yy/XzA1OTYyNjguanBn.jpg",
 			"roles": []string{
 				"pengurus",
 			},
@@ -217,6 +218,7 @@ var (
 			// "password_salt": "xxxxxxxxxxxx",
 			"fullname": "Dummy for view only user",
 			"status":   1,
+			"avatar":   "https://randomuser.me/api/portraits/men/55.jpg",
 			"roles": []string{
 				"view-only",
 			},
@@ -233,6 +235,7 @@ var (
 			// "password_salt": "xxxxxxxxxxxx",
 			"fullname": "Dummy for inactive user",
 			"status":   0,
+			"avatar":   "https://uifaces.co/our-content/donated/hvaUVob5.jpg",
 			"roles": []string{
 				"perngurus",
 			},
@@ -383,6 +386,7 @@ func SeedDistributorUser(client *firestore.Client, ctx context.Context) (err err
 			"password_salt": v["password_salt"],
 			"fullname":      v["fullname"],
 			"status":        v["status"],
+			"avatar":        v["avatar"],
 			"roles":         v["roles"],
 			// default
 			"created_at": time.Now(),
